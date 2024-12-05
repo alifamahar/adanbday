@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cake and Chat</title>
+    <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+}
+
+#background-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-image 0.5s ease;
+}
+
+.background1 {
+  background-image: url('background1.gif');
+  background-size: cover;
+}
+
+.background2 {
+  background-image: url('background2.gif');
+  background-size: cover;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+    </style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="background-container" class="background1">
+      </div>
+      <audio id="audioPlayer" src="tiuplilin.mp3" type="audio/mpeg" autoplay></audio>
+
+    <script>
+const container = document.getElementById('background-container');
+
+container.addEventListener('click', () => {
+  if (container.classList.contains('background1')) {
+    container.classList.remove('background1');
+    container.classList.add('background2');
+
+    // Setelah 6 detik, arahkan ke halaman berikutnya
+    setTimeout(() => {
+      window.location.href = 'hadiah.html'; // Ganti dengan URL halaman tujuan
+    }, 2000); // 6000ms = 6 detik
+  } else {
+    container.classList.remove('background2');
+    container.classList.add('background1');
+  }
+});
+
+
+
+    </script>
+</body>
+</html>

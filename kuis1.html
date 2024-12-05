@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <section class="container">
+    <h1>SOAL 1</h1>
+    <form id="name-form" class="form">
+      <div class="input-box">
+        <label>Siapa orang paling menyebalkan sedunia?</label>
+        <input type="text" id="name-input" placeholder="Masukin nama lengkapnya" required />
+      </div>
+      <button type="submit" id="submit-btn">Jawab</button>
+      <p id="error-message" style="color: red; display: none;">Salah wleee!</p>
+      <p id="success-message" style="color: green; display: none;"></p>
+    </form>
+  </section>
+
+  <!-- Gambar yang bisa diklik -->
+  <div class="clickable-image">
+    <img src="clue.png" class="image" id="trigger-image">
+  </div>
+
+  <!-- Card yang muncul saat gambar diklik -->
+  <div class="card" id="info-card">
+    <img src="mataadan.jpg" alt="Card Image">
+    <h3>Tadaaa!</h3>
+    <p>Ini dia mata orang paling menyebalkan sedunia</p>
+    <button id="close-card">Close</button>
+  </div>
+
+  <div class="button" id="menu-btn">
+    <button onclick="window.location.href='index.html'">Menu</button>
+  </div>
+  <audio id="audioPlayer" src="8bit.mp3" type="audio/mpeg" autoplay></audio>
+  
+  <script src="script.js"></script>
+</body>
+</html>

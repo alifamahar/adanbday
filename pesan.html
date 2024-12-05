@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cake and Chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap" rel="stylesheet">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Jersey 20";
+    }
+
+    body {
+        display: flex;
+        align-items: top;
+        height: 100vh;
+        margin: 0;
+        background-image: url("bgambil.gif");
+        background-color: black;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    #menu-btn {
+        position: fixed;
+        top: 40px;
+        left: 160px;
+        z-index: 1000;
+    }
+
+    #menu-btn button {
+        background-color: rgba(255, 255, 255, 0);
+        color: rgba(0, 0, 0, 0);
+        border: none;
+    }
+
+    .container {
+        position: relative;
+        width: 100%;
+        text-align: center;
+        margin-top: 80px;
+    }
+
+    .message-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 3000;
+        /* Pastikan elemen muncul di atas elemen lain */
+    }
+
+    .kotakpesan {
+        max-width: 70%;
+        /* Pastikan tidak lebih dari 90% layar */
+        max-height: 70%;
+        /* Maksimal 90% tinggi layar */
+        border-radius: 8px;
+        /* Opsional: tambahkan sudut bulat */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        /* Tambahkan efek bayangan */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .kotakpesan img {
+        max-width: 100%;
+        /* Buat gambar skalabel */
+        max-height: 100%;
+        /* Gambar tidak akan melampaui ukuran kotak */
+        border-radius: 4px;
+        /* Opsional */
+        object-fit: contain;
+        /* Pastikan gambar sesuai tanpa crop */
+    }
+
+    #prevBtn,
+    #nextBtn {
+        position: absolute;
+        top: 50%;
+        /* Vertikal tengah teks */
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        z-index: 10;
+        /* Pastikan tombol berada di atas elemen lainnya */
+    }
+
+    #prevBtn {
+        left: -100px;
+        max-height: 50px;
+        /* Sedikit keluar di sebelah kiri teks */
+    }
+
+    #nextBtn {
+        right: -100px;
+        max-height: 50px;
+        /* Sedikit keluar di sebelah kanan teks */
+    }
+
+    #prevBtn:hover,
+    #nextBtn:hover {
+        opacity: 0.8;
+        /* Efek hover untuk tombol */
+    }
+
+    #closeBtn {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-size: xx-large;
+        transform: none;
+        background-color: none;
+        background: none;
+        border: none;
+        color: #21ef80;
+    }
+
+    #closeBtn:hover {
+        color: #f32dd5;
+        /* Ubah warna saat dihover */
+    }
+
+    #message {
+        display: block;
+        position: absolute;
+        left: 15%;
+        right: 15%;
+        color: black;
+        padding: 50px;
+        padding-top: 120px;
+        border-radius: 10px;
+        text-align: left;
+        max-width: 70%;
+
+    }
+
+    #message p {
+        padding: 5px;
+        font-size: large;
+        line-height: 25px;
+    }
+
+    #message .text9{
+        text-align: center;
+    }
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="message-container" id="message-container">
+        <div class="kotakpesan" id="kotakpesan">
+            <img src="framepesan.png">
+        </div>
+        <div class="message" id="message">
+            <div class="text1" id="text1">
+                <p>Pertama, mari ucapkan Alhamdulillah sebagai rasa syukur atas:</p>
+                <p>1. Kamu masih diberi kesempatan hidup hingga tahun ini</p>
+                <p>2. Kamu masih diberi kekuatan untuk bertahan hingga detik ini</p>
+                <p>3. Kamu hadir di hidupku hingga saat ini</p>
+            </div>
+            <div class="text2" id="text2">
+                <p>Huft, 22 tahun yang berat ya? Apalagi tahun ini. Banyak hal yang ga kamu inginkan terjadi, banyak hal
+                    yang
+                    bikin kamu sakit dan sedih. Rasanya duniamu hancur ya? Semua yang udah kamu susun lebur gitu aja.
+                    badaimu hebat banget sayang, tapi kamu lebih hebat karena masih bisa berdiri di sana ngelawan semua
+                    badai
+                    yang datang. kamu kuat banget ampe Tuhan ngasih kepercayaan buat kamu bisa ngelewatin semuanya. Dan
+                    bener!
+                    kamu berhasil ngelewatin itu semua! Keren loh! Aku selalu bangga sama kamu sayang.-`♡´-<br><br>
+                    aku yakin kamu bosen sama semua kata-kata klise yang aku kasih buat kamu hahaha tapi aku ga akan
+                    bosen buat selalu ngingetin betapa hebatnya kamu.
+                </p>
+            </div>
+            <div class="text3" id="text3">
+                <p>kalo kamu merasa duniamu hancur, aku siap jadi pengrajin yang akan ngumpulin kepingan-kepingan diri
+                    kamu dan susun kembali seperti semula. mungkin ga akan sempurna, tapi aku akan berusaha buat jadiin
+                    kepingan itu untuk bikin dirimu versi baru, yang lebih bahagia dari sebelumnya tentunya. nanti kalo
+                    udah jadi, aku kasih nama kamu “Adan v.2.0”. sekarang masih maintenance, masih banyak kepingan yang
+                    belum aku temuin. tungguin ya. jangan dulu capek sama aku.</p>
+                </p>
+            </div>
+            <div class="text4" id="text4">
+                <p>Setelah Adan v.2.0. rilis, aku yakin dia akan jadi orang paling bahagia. semua rencana yang ia susun
+                    kembali terlaksana. aku ga jamin dia gaakan nemu gagal lagi di tengah jalan, tapi aku jamin dia akan
+                    lebih kuat buat ngelewatin itu. dia akan jadi orang paling keren yang pernah aku kenal di dunia ini
+                    (sekarang aja udah keren banget kok). </p>
+                </p>
+            </div>
+            <div class="text5" id="text5">
+                <p>Tapi kamu ga perlu buru-buru buat mencapai hal itu. sekarang kalo masih capek, istirahat dulu. kalo
+                    mau nangis, nangis dulu. kalo mau ngeluh, ngeluh dulu. gapapa. itu hal normal loh. jangan selalu
+                    dipendem ya. tapi inget, selama proses istirahat ini, jangan pernah kepikiran buat nyakitin diri
+                    kamu sendiri. jangan terlalu khawatirin banyak hal. jangan larut dalam takut sama hal-hal yang belum
+                    terjadi.
+                </p>
+            </div>
+            <div class="text6" id="text6">
+                <p>Kita gaakan pernah tau masa depan bakal terjadi kayak apa. tapi daripada mikir kemungkinan kamu akan
+                    gagal, coba pikir kemungkinan kamu akan berhasil sambil mengusahakan itu. banyak yang nungguin kamu
+                    buat
+                    bangkit, jadi
+                    jangan pernah nyerah buat lanjutin semua mimpi-mimpi kamu ya. jangan buru-buru, gapapa, yang penting
+                    ga
+                    nyerah!<br><br>
+                    ayo kita usahakan segala hal-hal baik di depan sana, sayang ♡.
+                </p>
+            </div>
+            <div class="text7" id="text7">
+                <p>Selamat bertambah usia, sayangku!♡<br><br>
+                    entah hal indah apa yang kamu lihat setelah diperlihatkan oleh malaikat kilas kehidupanmu sebanyak
+                    77x.
+                    mungkin kamu lihat aku, ya? hehe. tapi apapun itu, terima kasih karena sudah memilih untuk
+                    terlahir.<br>
+                    Terima kasih sudah memilih untuk bertahan.<br>
+                    Terima kasih sudah memilih untuk melawan semua sakitmu.<br>
+                    Terima kasih sudah memilih aku menemani hidupmu.<br>
+                </p>
+            </div>
+            <div class="text8" id="text8">
+                <p>Semoga kamu lalai dalam menyakiti diri sendiri, agar kamu lekas sembuh dari kosong yang hanya terisi
+                    api
+                    <br>
+                    hilanglah kasar yang dunia ukirkan padamu<br>
+                    hilanglah semua prasangka yang membuatmu getir<br>
+                    mengalirlah kalam baik dari setiap celah gigimu<br>
+                    merekahlah lengkungan manis walau kaki ditarik pilu<br>
+                    semoga dihindarkan matamu dari nama yang hanya bisa membawa air mata<br>
+                    semoga dijauhkan dari tangis tak berarti<br>
+                    semoga bayanganmu tak pernah membuatmu takut<br>
+                    semoga canggih tubuhmu mampu menyembuhkan lukanya sendiri<br>
+                    lalu yg terakhir, aku mohon kepada semesta dibahagiakanlah kamu selamanya. selamanya.
+                </p>
+            </div>
+            <div class="text9" id="text9">
+                <h1>hiduplah lebih lama sayangku. bersamaku.</h1>
+            </div>
+            <img id="prevBtn" src="prev.png">
+            <img id="nextBtn" src="next2.png">
+        </div>
+
+        <button id="closeBtn" onclick="window.location.href='hadiah.html'">🗙</button>
+    </div>
+    <audio id="audioPlayer" src="fix you.mp3" type="audio/mpeg" autoplay></audio>
+    </div>
+
+    <script>
+        // Ambil elemen-elemen teks dan tombol
+        const texts = [document.getElementById("text1"), document.getElementById("text2"), document.getElementById("text3"), document.getElementById("text4"), document.getElementById("text5"), document.getElementById("text6"), document.getElementById("text7"), document.getElementById("text8"), document.getElementById("text9")];
+        const nextBtn = document.getElementById("nextBtn");
+        const prevBtn = document.getElementById("prevBtn");
+        var audioPlayer = document.getElementById("audioPlayer");
+        var closeBtn = document.getElementById("closeBtn");
+        let currentIndex = 0; // Indeks awal
+
+        // Fungsi untuk memperbarui visibilitas teks
+        function updateVisibility() {
+            texts.forEach((text, index) => {
+                text.style.display = index === currentIndex ? "block" : "none";
+            });
+
+            // Tampilkan/hilangkan tombol prev/next sesuai kondisi
+            prevBtn.style.display = currentIndex > 0 ? "block" : "none";
+            nextBtn.style.display = currentIndex < texts.length - 1 ? "block" : "none";
+        }
+
+        // Event listener untuk tombol Next
+        nextBtn.addEventListener("click", () => {
+            if (currentIndex < texts.length - 1) {
+                currentIndex++;
+                updateVisibility();
+            }
+        });
+
+        // Event listener untuk tombol Previous
+        prevBtn.addEventListener("click", () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateVisibility();
+            }
+        });
+
+        // Inisialisasi tampilan awal
+        updateVisibility();
+
+        // Mendapatkan elemen audio dan tombol exit
+
+
+        // Fungsi untuk memulai fade out dan menghentikan audio
+        function fadeOutAndStop() {
+            var fadeDuration = 2; // Durasi fade out dalam detik
+            var fadeStep = 0.05;  // Langkah pengurangan volume
+
+            // Mengurangi volume setiap langkah sampai mencapai 0
+            var interval = setInterval(function () {
+                if (audioPlayer.volume > 0) {
+                    audioPlayer.volume -= fadeStep; // Mengurangi volume
+                } else {
+                    clearInterval(interval); // Menghentikan interval jika volume sudah 0
+                    audioPlayer.pause(); // Menghentikan audio
+                    audioPlayer.currentTime = 0; // Mengatur posisi ke awal lagu
+                }
+            }, fadeDuration * 100); // Interval untuk mengurangi volume, disesuaikan dengan durasi fade
+        }
+
+        // Menambahkan event listener untuk tombol exit
+        exitBtn.addEventListener("click", fadeOutAndStop);
+
+    </script>
+</body>
+
+</html>
