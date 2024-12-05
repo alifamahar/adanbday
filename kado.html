@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cake and Chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap" rel="stylesheet">
+</head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Jersey 20";
+        }
+        
+        body {
+            display: flex;
+            align-items: top;
+            height: 100vh;
+            margin: 0;
+            background-image: url("bgambil.gif");
+            background-color: black;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #menu-btn {
+            position: fixed;
+            top: 40px;
+            left: 160px;
+            z-index: 1000;
+        }
+
+        #menu-btn button {
+            background-color: rgba(255, 255, 255, 0);
+            color: rgba(0, 0, 0, 0);
+            border: none;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            /* Pastikan elemen muncul di atas elemen lain */
+        }
+
+        .kotakpesan {
+            max-width: 70%;
+            /* Pastikan tidak lebih dari 90% layar */
+            max-height: 70%;
+            /* Maksimal 90% tinggi layar */
+            border-radius: 8px;
+            /* Opsional: tambahkan sudut bulat */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            /* Tambahkan efek bayangan */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .kotakpesan img {
+            max-width: 100%;
+            /* Buat gambar skalabel */
+            max-height: 100%;
+            /* Gambar tidak akan melampaui ukuran kotak */
+            border-radius: 4px;
+            /* Opsional */
+            object-fit: contain;
+            /* Pastikan gambar sesuai tanpa crop */
+        }
+
+        #prevBtn,
+        #nextBtn {
+            position: absolute;
+            top: 50%;
+            /* Vertikal tengah teks */
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 10;
+            /* Pastikan tombol berada di atas elemen lainnya */
+        }
+
+        #prevBtn {
+            left: -100px;
+            max-height: 50px;
+            /* Sedikit keluar di sebelah kiri teks */
+        }
+
+        #nextBtn {
+            right: -100px;
+            max-height: 50px;
+            /* Sedikit keluar di sebelah kanan teks */
+        }
+
+        #prevBtn:hover,
+        #nextBtn:hover {
+            opacity: 0.8;
+            /* Efek hover untuk tombol */
+        }
+
+        #closeBtn {
+            position: absolute;
+            top:30px;
+            right: 30px;
+            font-size: xx-large;
+            transform: none;
+            background-color: none;
+            background: none;
+            border: none;
+            color: #21ef80;
+        }
+
+        #closeBtn:hover {
+            color: #f32dd5;
+            /* Ubah warna saat dihover */
+        }
+
+        #message {
+            display: block;
+            position: absolute;
+            left: 15%;
+            right: 15%;
+            color: black;
+            padding: 50px;
+            padding-top:120px;
+            border-radius: 10px;
+            text-align: left;
+            max-width: 70%;
+
+        }
+
+        #message p {
+            padding: 5px;
+            font-size: large;
+        }
+
+        
+    </style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <audio id="audioPlayer" src="sal.mp3" type="audio/mpeg" autoplay></audio>
+    <div class="message-container" id="message-container">
+        <div class="kotakpesan" id="kotakpesan">
+            <img src="framepesan.png">
+        </div>
+        <div class="message" id="message">
+            <div class="text1" id="text1">
+                <h1>Cara klaim kado:</h1>
+                <p>1. Pergi ke stasiun kereta api terdekat</p>
+                <p>2. Naik kereta dari stasiun kereta api terdekat ke stasiun cikarang</p>
+                <p>3. Nyampe di stasiun cikarang sebelum jam 11.00 WIB</p>
+                <p>4. Scan tiket <a href="https://drive.google.com/uc?export=download&id=1ikUbHG8LOMUohU1Ig9zYQrBICLPaFlVY">ini</a></p>
+                <p>5. Ketemu aku, terus cium</p>
+                <p>6. Baru boleh diambil kadonya yeay</p>
+            </div>
+        </div>
+
+        <button id="closeBtn" onclick="window.location.href='hadiah.html'">🗙</button>
+    </div>
+
+    </div>
+
+    <script>
+        // Ambil elemen-elemen teks dan tombol
+        const texts = [document.getElementById("text1"), document.getElementById("text2"), document.getElementById("text3")];
+        const nextBtn = document.getElementById("nextBtn");
+        const prevBtn = document.getElementById("prevBtn");
+        let currentIndex = 0; // Indeks awal
+
+        // Fungsi untuk memperbarui visibilitas teks
+        function updateVisibility() {
+            texts.forEach((text, index) => {
+                text.style.display = index === currentIndex ? "block" : "none";
+            });
+
+            // Tampilkan/hilangkan tombol prev/next sesuai kondisi
+            prevBtn.style.display = currentIndex > 0 ? "block" : "none";
+            nextBtn.style.display = currentIndex < texts.length - 1 ? "block" : "none";
+        }
+
+        // Event listener untuk tombol Next
+        nextBtn.addEventListener("click", () => {
+            if (currentIndex < texts.length - 1) {
+                currentIndex++;
+                updateVisibility();
+            }
+        });
+
+        // Event listener untuk tombol Previous
+        prevBtn.addEventListener("click", () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateVisibility();
+            }
+        });
+
+        // Inisialisasi tampilan awal
+        updateVisibility();
+    </script>
+</body>
+
+</html>

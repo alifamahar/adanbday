@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cake and Chat</title>
+    <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Jersey 20", sans-serif;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Pastikan tinggi body memenuhi viewport */
+  margin: 0; /* Hapus margin bawaan */
+  background-image: url("yeay.gif");
+  background-color: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#menu-btn {
+      position: fixed;
+      top: 70px;
+      left: 210px;
+      z-index: 1000;
+    }
+
+    #menu-btn button {
+      background-color: rgba(255, 255, 255, 0);
+      color: rgba(198, 42, 42, 0);
+      font-size: xx-large;
+      border: none;
+    }
+    </style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="button" id="menu-btn">
+    <button onclick="window.location.href='index.html'">Menu</button>
+  </div>
+</body>
+</html>
