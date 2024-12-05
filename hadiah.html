@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Cake and Chat</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Jersey 20", sans-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: top;
+      height: 100vh;
+      margin: 0;
+      background-image: url("bgambil.gif");
+      background-color: black;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    #menu-btn {
+      position: fixed;
+      top: 40px;
+      left: 160px;
+      z-index: 1000;
+    }
+
+    #menu-btn button {
+      background-color: rgba(255, 255, 255, 0);
+      color: rgba(0, 0, 0, 0);
+      border: none;
+    }
+
+    #rahasia-btn {
+      position: fixed;
+      top: 40px;
+      left: 74%;
+      z-index: 1000;
+    }
+
+    #rahasia-btn button {
+      background-color: rgba(255, 0, 0, 0);
+      color: rgba(0, 0, 0, 0);
+      border: none;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .container img:hover {
+      transform: scale(1.5);
+    }
+
+    .title {
+      font-size: 2rem;
+      color: #ff00ff;
+      text-shadow: 2px 2px #00ff00, -2px -2px #00ffff;
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .icon {
+      position: absolute;
+      text-align: center;
+    }
+
+    .icon img {
+      height: 64px;
+    }
+
+    .icon p {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .pesan {
+      top: 30%;
+      left: 15%;
+    }
+
+    .kado {
+      top: 30%;
+      right: 15%;
+    }
+
+    .momen {
+      top: 60%;
+      right: 25%;
+    }
+
+    .album {
+      top: 60%;
+      left: 25%;
+      cursor: pointer;
+    }
+
+    .gallery-container {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      align-items: center;
+      justify-content: center;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      text-align: center;
+    }
+
+    #title {
+      margin-top: 100px;
+      margin-bottom: 50px;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .gallery {
+      display: flex;
+      transition: transform 0.5s ease;
+      width: 100%;
+    }
+
+    .gallery-group {
+      flex: 0 0 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .gallery img {
+      width: 20%;
+      cursor: pointer;
+      padding: 10px;
+      box-sizing: border-box;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
+
+    .gallery-container button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #fff;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .gallery-container img#prevBtn {
+      left: 10px;
+      max-height: 50px;
+    }
+
+    .gallery-container img#nextBtn {
+      right: 10px;
+      max-height: 50px;
+    }
+
+    .gallery-container button#closeBtn {
+      top: 10px;
+      right: 10px;
+      font-size: xx-large;
+      transform: none;
+      background-color: none;
+      background: none;
+      border: none;
+      color: #21ef80;
+    }
+
+    .gallery-container button:hover {
+      transform: scale(1.1);
+    }
+
+    .gallery-container img:hover {
+      transform: scale(1.1);
+    }
+
+    .message-container {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 3000;
+      /* Pastikan elemen muncul di atas elemen lain */
+    }
+
+
+    #message {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: url('pesan.png') no-repeat center center/cover;
+      background-color: rgba(255, 120, 228, 0.589);
+      color: black;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 100%;
+
+    }
+
+
+
+    #message p,
+    #message ol {
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .container-count {
+      display: none;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      /* Agar responsif untuk layar kecil */
+    }
+
+    .countdown {
+      text-align: center;
+      background: #333;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      flex: 1;
+      max-width: 300px;
+      /* Batas lebar setiap kotak */
+    }
+
+    .countdown h2 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #00ff00;
+      text-transform: uppercase;
+    }
+
+    .timer {
+      font-size: 24px;
+      color: #00ff00;
+      font-weight: bold;
+    }
+  </style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="icon pesan" id="pesan-btn">
+      <a href="pesan.html"><img src="pesan.gif" alt="pesan-btn"></a>
+    </div>
+    <div class="icon kado">
+      <a href="kado.html"><img src="kado.gif" alt="Kado"></a>
+    </div>
+    <div class="icon momen" id="momen-btn">
+      <a href="momen.html"><img src="momen.gif" alt="momen-btn"></a>
+    </div>
+    <div class="icon album" id="album-btn">
+      <a href="album.html"><img src="album.gif" alt="Album"></a>
+    </div>
+  </div>
+  <div class="button" id="menu-btn">
+    <button onclick="window.location.href='index.html'">Menuuu</button>
+  </div>
+  <div class="button" id="rahasia-btn">
+    <button onclick="window.location.href='rahasia.html'">Rahasiaaaaaaaaaaaaa</button>
+  </div>
+  <!-- Slider Galeri -->
+  <!-- Elemen Galeri -->
+
+  <audio id="audioPlayer" src="yoasobi.mp3" type="audio/mpeg" autoplay></audio>
+ 
+</body>
+
+</html>
